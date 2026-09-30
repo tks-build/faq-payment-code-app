@@ -1,0 +1,354 @@
+/**
+ * FAQ / Payment Code app.
+ *
+ * TRTL visual language, copied from the guest panel (helpscoutapp) so the two
+ * apps read as siblings in the Help Scout sidebar. If the panel's palette
+ * changes, change it here too — the projects are deliberately separate and
+ * share no code.
+ *
+ * Typography is not set here: <DefaultStyle /> from @helpscout/ui-kit makes
+ * the app inherit Help Scout's own type stack.
+ */
+
+:root {
+  --trtl-ink: #1b211e;
+  --trtl-ink-2: #3c443e;
+  --trtl-muted: #767a6f;
+  --trtl-muted-2: #9a9e92;
+
+  --trtl-green: #0e5c48;
+  --trtl-green-hi: #14755c;
+  --trtl-green-soft: #e7f1ec;
+  --trtl-green-line: #cbe2d7;
+
+  --trtl-surface: #ffffff;
+  --trtl-surface-2: #fcfcfa;
+  --trtl-line: #e5e3da;
+
+  --trtl-code-ink: #7c7a55;
+  --trtl-code-bg: #f1f0e6;
+
+  --trtl-amber: #96702a;
+  --trtl-amber-bg: #fbf3e2;
+  --trtl-amber-line: #eddfc0;
+
+  --trtl-red: #a8402b;
+
+  --trtl-radius: 8px;
+  --trtl-radius-sm: 6px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0 !important;
+}
+
+/* container-type lets the app respond to the sidebar width the BM has
+   dragged to, rather than to the browser window. */
+.app {
+  color: var(--trtl-ink);
+  container-type: inline-size;
+  display: grid;
+  gap: 8px;
+  padding: 8px 10px 10px;
+  position: relative;
+  width: 100%;
+}
+
+.label {
+  color: var(--trtl-ink-2);
+  display: block;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  margin-bottom: 2px;
+  text-transform: uppercase;
+}
+
+.primaryButton {
+  align-items: center;
+  background: var(--trtl-green);
+  border: 1px solid var(--trtl-green);
+  border-radius: var(--trtl-radius);
+  color: #ffffff;
+  cursor: pointer;
+  display: flex;
+  font-size: 13px;
+  font-weight: 700;
+  justify-content: center;
+  min-height: 32px;
+  text-decoration: none;
+  transition: background 0.12s, border-color 0.12s;
+  width: 100%;
+}
+
+.primaryButton:hover {
+  background: var(--trtl-green-hi);
+  border-color: var(--trtl-green-hi);
+}
+
+
+.tplMuted {
+  color: var(--trtl-muted);
+  font-size: 12px;
+}
+
+/* ------------------------------------------------------------ guest codes */
+
+.tplCodeList {
+  display: grid;
+  gap: 4px;
+}
+
+/* One row per code: the code itself is what BMs recognise, so it leads in
+   the monospace code style; trip and date sit quietly beside it. */
+.tplCode {
+  align-items: baseline;
+  background: var(--trtl-surface-2);
+  border: 1px solid var(--trtl-line);
+  border-radius: var(--trtl-radius-sm);
+  color: var(--trtl-ink);
+  cursor: pointer;
+  display: flex;
+  font: inherit;
+  gap: 8px;
+  justify-content: space-between;
+  padding: 5px 8px;
+  text-align: left;
+  transition: border-color 0.12s, background 0.12s;
+  width: 100%;
+}
+
+.tplCode:hover,
+.tplCode:focus-visible {
+  background: var(--trtl-green-soft);
+  border-color: var(--trtl-green-line);
+}
+
+.tplCodeValue {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 12.5px;
+  font-weight: 700;
+}
+
+.tplCodeMeta {
+  color: var(--trtl-muted);
+  font-size: 11px;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ------------------------------------------------------------------ input */
+
+.tplSearch {
+  position: relative;
+}
+
+.tplInput {
+  background: var(--trtl-surface);
+  border: 1px solid var(--trtl-line);
+  border-radius: var(--trtl-radius-sm);
+  color: var(--trtl-ink);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 13px;
+  min-height: 32px;
+  padding: 6px 30px 6px 9px;
+  width: 100%;
+}
+
+.tplInput::placeholder {
+  color: var(--trtl-muted-2);
+}
+
+.tplInput:focus {
+  border-color: var(--trtl-green);
+  box-shadow: 0 0 0 2px var(--trtl-green-soft);
+  outline: none;
+}
+
+.tplClear {
+  background: none;
+  border: 0;
+  color: var(--trtl-muted);
+  cursor: pointer;
+  font-size: 12px;
+  height: 24px;
+  position: absolute;
+  right: 4px;
+  top: 4px;
+  width: 24px;
+}
+
+.tplClear:hover {
+  color: var(--trtl-ink);
+}
+
+.tplHint {
+  color: var(--trtl-muted);
+  font-size: 12px;
+  margin: 0;
+}
+
+.tplLinkButton {
+  background: none;
+  border: 0;
+  color: var(--trtl-green);
+  cursor: pointer;
+  font: inherit;
+  font-weight: 600;
+  padding: 0;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.tplStatus {
+  align-items: center;
+  color: var(--trtl-muted);
+  display: flex;
+  font-size: 12px;
+  gap: 6px;
+}
+
+.tplStatusError {
+  color: var(--trtl-red);
+  font-weight: 600;
+}
+
+/* ----------------------------------------------------------------- result */
+
+.tplResult {
+  border-top: 1px solid var(--trtl-line);
+  display: grid;
+  gap: 7px;
+  padding-top: 8px;
+}
+
+.tplResultHead {
+  align-items: baseline;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 8px;
+  justify-content: space-between;
+}
+
+.tplResultTitle {
+  color: var(--trtl-ink);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.tplResultSub {
+  background: var(--trtl-code-bg);
+  border-radius: 999px;
+  color: var(--trtl-code-ink);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 1px 7px;
+}
+
+.tplMessage {
+  color: var(--trtl-ink-2);
+  font-size: 12.5px;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.tplMessageMiss {
+  color: var(--trtl-red);
+}
+
+.tplChipGroup {
+  display: grid;
+  gap: 3px;
+}
+
+.tplChipRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.tplChip {
+  background: var(--trtl-green-soft);
+  border: 1px solid var(--trtl-green-line);
+  border-radius: 999px;
+  color: var(--trtl-green);
+  cursor: pointer;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 11.5px;
+  font-weight: 700;
+  padding: 3px 10px;
+  transition: background 0.12s, color 0.12s, border-color 0.12s;
+}
+
+.tplChip:hover,
+.tplChip:focus-visible {
+  background: var(--trtl-green);
+  border-color: var(--trtl-green);
+  color: #ffffff;
+}
+
+/* Amber, like Client Flag: a placeholder left in the text would be sent to
+   the guest verbatim, so this is a must-read rather than a footnote. */
+.tplWarning {
+  background: var(--trtl-amber-bg);
+  border: 1px solid var(--trtl-amber-line);
+  border-radius: var(--trtl-radius-sm);
+  color: var(--trtl-amber);
+  font-size: 12px;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+  padding: 6px 8px;
+}
+
+.tplWarningNote {
+  display: block;
+  font-size: 11px;
+  margin-top: 3px;
+}
+
+.tplCopy {
+  margin-top: 0;
+}
+
+/* The email as it will paste. Help Scout strips CSS from sent mail, so only
+   the template's own markup matters here; this just keeps it readable in a
+   narrow column. */
+.tplPreview {
+  background: var(--trtl-surface);
+  border: 1px solid var(--trtl-line);
+  border-radius: var(--trtl-radius-sm);
+  color: var(--trtl-ink);
+  font-size: 12.5px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+  padding: 8px 10px;
+}
+
+.tplPreview > :first-child {
+  margin-top: 0;
+}
+
+.tplPreview > :last-child {
+  margin-bottom: 0;
+}
+
+.tplPreview p {
+  margin: 0 0 8px;
+}
+
+.tplPreview h3 {
+  font-size: 14px !important;
+}
+
+.tplPreview img {
+  height: auto;
+  max-width: 100%;
+}

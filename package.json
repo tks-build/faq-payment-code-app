@@ -1,0 +1,22 @@
+{
+  "name": "faq-payment-code-app",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "FAQ / Payment Code: Help Scout sidebar app for Ops email templates from Airtable",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "build": "vite build",
+    "preview": "vite preview --host 0.0.0.0"
+  },
+  "dependencies": {
+    "@helpscout/javascript-sdk": "^0.10.0",
+    "@helpscout/ui-kit": "^0.13.6",
+    "@vitejs/plugin-react": "^4.2.1",
+    "airtable": "^0.12.2",
+    "dotenv": "^16.4.5",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "vite": "^5.2.0"
+  }
+}
