@@ -16,7 +16,7 @@ It is deliberately separate from the guest panel (`helpscoutapp`): its own repo,
 1. Create a read-only Airtable token for this app (see `.env.example` for scopes).
 2. Import this repo into Vercel as a new project. Vercel detects Vite; no build settings are needed.
 3. In the Vercel project, add `AIRTABLE_API_KEY` under Settings > Environment Variables, then redeploy.
-4. In Help Scout, go to Manage > Apps, create a new app named **FAQ/Payment Code App**, and set its callback URL to the Vercel production URL.
+4. In Help Scout, go to **Workspace → Apps** (left sidebar) and click **Create**. Name it **FAQ/Payment Code App**, set its callback URL to the Vercel production URL, and give it a long random secret key — keep a copy, as request verification will need it. Not **My Apps** under your profile: that only issues API credentials and cannot add anything to the sidebar.
 5. Enable it for the mailboxes the BMs work in. Help Scout shows it as its own card in the sidebar.
 
 ## Local development
